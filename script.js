@@ -77,29 +77,6 @@ compareHands = (hand1, hand2) => {
     }
 }
 
-// 1. Pull in cards from API
-
-// const card1 = {
-//     "image": "https://www.deckofcardsapi.com/static/img/KH.png",
-//     "value": "4",
-//     "suit": "HEARTS",
-//     "code": "KH"
-// }
-// const card2 = {
-//     "image": "https://www.deckofcardsapi.com/static/img/8C.png",
-//     "value": "3",
-//     "suit": "CLUBS",
-//     "code": "8C"
-// }
-// let hand1 = scoreCards(card1.value, card2.value);
-// let hand2 = scoreCards("3", "3");
-
-// console.log(hand1, hand2)
-// compareHands(hand1, hand2);
-
-console.log("connected!")
-
-
 // Connect API to new shuffled deck, deal cards, one card at a time until each person receives 4 cards.
 const selectNewDeckURL = "https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1"
 
@@ -120,6 +97,11 @@ function selectNewDeck(event) {
                     $.ajax(drawCardsURL1 + deckId + drawCardsURL2).then(
                         (data) => {
                             dealtCardsforPlayer1.push(data.cards)
+                            console.log(data)
+                            const addLi = document.createElement("li");
+                            const addPic = document.createElement("img")
+                            addPic.src = (data.cards[0].image)
+                            $("ul.playerCards").append(addLi).append(addPic);
                         },
                         (error) => {
                             console.log('webrokeithere')
@@ -131,15 +113,50 @@ function selectNewDeck(event) {
                             dealtCardsforDealer.push(data.cards)
                         },
                         (error) => {
-                            console.log('webrokeithere')
+                            console.log('webrokeittthere')
                             return;
                         })
                 }
             }
         },
         (error) => {
-            console.log('webrokeitthere')
+            console.log('webrokeiteverywhere')
         }
     )
 }
+
+
+// const addPicToLi = document.createElement("li");
+// addPicToLi.innerHTML = (<`img src="${data.cards.img}"`)
+// $("playerCards").append(addPicToLi);
+
+//     const addLi = document.createElement("li");
+//     const input = document.querySelector("input");
+//     addLi.innerHTML = "&nbsp&nbsp&nbsp&nbsp&nbsp" + input.value;
+
+//     $("ul").append(addLi);
+//     addLi.prepend(addButton);
+
+//     input.value = "";
+// });
+
+// const card1 = {
+//     "image": "https://www.deckofcardsapi.com/static/img/KH.png",
+//     "value": "4",
+//     "suit": "HEARTS",
+//     "code": "KH"
+// }
+// const card2 = {
+//     "image": "https://www.deckofcardsapi.com/static/img/8C.png",
+//     "value": "3",
+//     "suit": "CLUBS",
+//     "code": "8C"
+// }
+// let hand1 = scoreCards(card1.value, card2.value);
+// let hand2 = scoreCards("3", "3");
+
+// console.log(hand1, hand2)
+// compareHands(hand1, hand2);
+
+console.log("connected!")
 
