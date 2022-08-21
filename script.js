@@ -77,28 +77,69 @@ compareHands = (hand1, hand2) => {
     }
 }
 
-console.log("connected!")
 // 1. Pull in cards from API
-// 2. Convert J-A to numbers
-// 3. Create Game Logic
+
+// const card1 = {
+//     "image": "https://www.deckofcardsapi.com/static/img/KH.png",
+//     "value": "4",
+//     "suit": "HEARTS",
+//     "code": "KH"
+// }
+// const card2 = {
+//     "image": "https://www.deckofcardsapi.com/static/img/8C.png",
+//     "value": "3",
+//     "suit": "CLUBS",
+//     "code": "8C"
+// }
+// let hand1 = scoreCards(card1.value, card2.value);
+// let hand2 = scoreCards("3", "3");
+
+// console.log(hand1, hand2)
+// compareHands(hand1, hand2);
+
+console.log("connected!")
 
 
-selectNewDeck = "https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1"
+// Connect API to new shuffled deck, deal cards, one card at a time until each person receives 4 cards.
+const selectNewDeckURL = "https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1"
 
-const card1 = {
-    "image": "https://www.deckofcardsapi.com/static/img/KH.png",
-    "value": "4",
-    "suit": "HEARTS",
-    "code": "KH"
+$("button").click("#startButton", selectNewDeck)
+
+const drawCardsURL1 = "https://www.deckofcardsapi.com/api/deck/";
+const drawCardsURL2 = "/draw/?count=1";
+const dealtCardsforPlayer1 = [];
+const dealtCardsforDealer = [];
+
+function selectNewDeck(event) {
+    event.preventDefault();
+    $.ajax(selectNewDeckURL).then(
+        (data) => {
+            deckId = (data.deck_id)
+            for (i = 0; i < 8; i++) {
+                if (i % 2 === 0)
+                    $.ajax(drawCardsURL1 + deckId + drawCardsURL2).then(
+                        (data) => {
+                            dealtCardsforPlayer1.push(data.cards)
+                        },
+                        (error) => {
+                            console.log('webrokeithere')
+                            return;
+                        })
+                else {
+                    $.ajax(drawCardsURL1 + deckId + drawCardsURL2).then(
+                        (data) => {
+                            dealtCardsforDealer.push(data.cards)
+                        },
+                        (error) => {
+                            console.log('webrokeithere')
+                            return;
+                        })
+                }
+            }
+        },
+        (error) => {
+            console.log('webrokeitthere')
+        }
+    )
 }
-const card2 = {
-    "image": "https://www.deckofcardsapi.com/static/img/8C.png",
-    "value": "3",
-    "suit": "CLUBS",
-    "code": "8C"
-}
-let hand1 = scoreCards(card1.value, card2.value);
-let hand2 = scoreCards("3", "3");
 
-console.log(hand1, hand2)
-compareHands(hand1, hand2);
