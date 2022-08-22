@@ -21,6 +21,10 @@ li {
     background-color: black;
     color: white;
 }
+#setHand {
+    background-color: black;
+    color: white;
+}
 img {
     max-height: 150px;
     position: static;

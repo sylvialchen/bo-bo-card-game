@@ -78,10 +78,10 @@ compareHands = (hand1, hand2) => {
     }
 }
 
-// Connect API to new shuffled deck, deal cards, one card at a time until each person receives 4 cards.
+/////////// Connect API to new shuffled deck, deal cards, one card at a time until each person receives 4 cards.
 const selectNewDeckURL = "https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1"
 
-$("button").click("#startButton", selectNewDeck)
+$("#startButton").click("button", selectNewDeck)
 
 const drawCardsURL1 = "https://www.deckofcardsapi.com/api/deck/";
 const drawCardsURL2 = "/draw/?count=1";
@@ -93,7 +93,8 @@ function selectNewDeck(event) {
     event.preventDefault();
     dealtCardsforDealer.splice(0,dealtCardsforDealer.length);
     dealtCardsforPlayer1.splice(0,dealtCardsforPlayer1.length);
-    $(".playerCards").empty();
+    $(".playerCards").remove();
+    $("li").remove();
     $.ajax(selectNewDeckURL).then(
         (data) => {
             deckId = (data.deck_id)
@@ -102,11 +103,11 @@ function selectNewDeck(event) {
                     $.ajax(drawCardsURL1 + deckId + drawCardsURL2).then(
                         (data) => {
                             dealtCardsforPlayer1.push(data.cards)
-                            console.log(data)
                             const addLi = document.createElement("li");
                             const addPic = document.createElement("img");
+                            addPic.setAttribute("class", "playerCards")
                             addPic.src = (data.cards[0].image);
-                            $("ul.playerCards").append(addLi).append(addPic);
+                            $("ul.currentPlayerCards").append(addLi).append(addPic);
                         },
                         (error) => {
                             console.log('webrokeithere')
@@ -129,6 +130,46 @@ function selectNewDeck(event) {
         }
     )
 }
+/////////// MAKE CARDS MOVEABLE ON MOBILE ONLY
+// Player needs to choose how they will arrange the cards.
+// **** CODE FROM WWW.HORUSKOL.NET
+// **** https://www.horuskol.net/blog/2020-08-15/drag-and-drop-elements-on-touch-devices/
+
+let moving = null;
+
+$("body").on("touchstart", "img", function (event) {
+    moving = event.target;
+});
+
+$("body").on("touchmove", "img", function (event) {
+});
+
+$("body").on("touchend", "img", function (event) {
+    if (moving) {
+        if (event.currentTarget.tagName !== 'HTML') {
+            let target = null;
+            if (event.clientX) {
+                target = document.elementFromPoint(event.clientX, event.clientY);
+            } else {
+                target = document.elementFromPoint(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+            }
+            target.appendChild(moving);
+        }
+        moving = null;
+    }
+});
+
+
+/////////// SET CARDS BASED ON USER ARRANGEMENT
+$("#setHand").click("#button", calculateHand)
+
+function calculateHand(event) {
+    event.preventDefault();
+    console.log(dealtCardsforPlayer1);
+}
+
+
+
 
 
 // const card1 = {
@@ -151,32 +192,4 @@ function selectNewDeck(event) {
 
 console.log("connected!")
 
-// function allowDrop(ev) {
-//     ev.preventDefault();
-//   }
-  
-//   function drag(ev) {
-//     ev.dataTransfer.setData("text", ev.target.id);
-//   }
-  
-//   function drop(ev) {
-//     ev.preventDefault();
-//     var data = ev.dataTransfer.getData("text");
-//     ev.target.appendChild(document.getElementById(data));
-//   }
 
-
-$("ul").on("touchstart", "img", function (evt) {
-    console.log("start")
-});
-
-$("ul").on("touchmove", "img", function (evt) {
-    console.log("move")
-
-});
-
-$("ul").on("touchend", "img", function (evt) {
-    console.log(evt)
-
-
-});
