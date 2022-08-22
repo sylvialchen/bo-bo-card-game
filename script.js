@@ -6,8 +6,9 @@
 // (3) JQK = 10 & A = 1
 // (4) Highest number is 9. (i.e., Ace + 9 = 0)
 // (5) A Natural 9 beats an Artificial 9.
-// To implement this, a scoring scale was created using base 10. A Natural 5 scores as 50, 
-// whereas an Artificial 5 scores as 49 (simply subtracting 1 to make the distinction between Natural 7 Artificial).
+// To implement this, a scoring scale was created by multiplying the value by 10 
+// and adjusting by (1) for type of hand/ set made.
+// A Natural 5 scores as 50, whereas an Artificial 5 scores as 49.
 
 scoreCards = (cardValueOnly1, cardValueOnly2) => {
     if (cardValueOnly1 === cardValueOnly2) {
@@ -87,8 +88,12 @@ const drawCardsURL2 = "/draw/?count=1";
 const dealtCardsforPlayer1 = [];
 const dealtCardsforDealer = [];
 
+
 function selectNewDeck(event) {
     event.preventDefault();
+    dealtCardsforDealer.splice(0,dealtCardsforDealer.length);
+    dealtCardsforPlayer1.splice(0,dealtCardsforPlayer1.length);
+    $(".playerCards").empty();
     $.ajax(selectNewDeckURL).then(
         (data) => {
             deckId = (data.deck_id)
@@ -99,8 +104,8 @@ function selectNewDeck(event) {
                             dealtCardsforPlayer1.push(data.cards)
                             console.log(data)
                             const addLi = document.createElement("li");
-                            const addPic = document.createElement("img")
-                            addPic.src = (data.cards[0].image)
+                            const addPic = document.createElement("img");
+                            addPic.src = (data.cards[0].image);
                             $("ul.playerCards").append(addLi).append(addPic);
                         },
                         (error) => {
@@ -126,20 +131,6 @@ function selectNewDeck(event) {
 }
 
 
-// const addPicToLi = document.createElement("li");
-// addPicToLi.innerHTML = (<`img src="${data.cards.img}"`)
-// $("playerCards").append(addPicToLi);
-
-//     const addLi = document.createElement("li");
-//     const input = document.querySelector("input");
-//     addLi.innerHTML = "&nbsp&nbsp&nbsp&nbsp&nbsp" + input.value;
-
-//     $("ul").append(addLi);
-//     addLi.prepend(addButton);
-
-//     input.value = "";
-// });
-
 // const card1 = {
 //     "image": "https://www.deckofcardsapi.com/static/img/KH.png",
 //     "value": "4",
@@ -160,3 +151,32 @@ function selectNewDeck(event) {
 
 console.log("connected!")
 
+// function allowDrop(ev) {
+//     ev.preventDefault();
+//   }
+  
+//   function drag(ev) {
+//     ev.dataTransfer.setData("text", ev.target.id);
+//   }
+  
+//   function drop(ev) {
+//     ev.preventDefault();
+//     var data = ev.dataTransfer.getData("text");
+//     ev.target.appendChild(document.getElementById(data));
+//   }
+
+
+$("ul").on("touchstart", "img", function (evt) {
+    console.log("start")
+});
+
+$("ul").on("touchmove", "img", function (evt) {
+    console.log("move")
+
+});
+
+$("ul").on("touchend", "img", function (evt) {
+    console.log(evt)
+
+
+});

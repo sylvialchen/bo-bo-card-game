@@ -13,7 +13,21 @@ body {
 h1 {
     font-size: 72px;
 }
+li {
+    display: inline-block;
+    list-style-type: none;
+}
 #startButton {
     background-color: black;
     color: white;
+}
+img {
+    max-height: 150px;
+    position: static;
+}
+table {
+  background-color: white;  
+  border: black;
+  color:black;
+  text-align: center;
 }
