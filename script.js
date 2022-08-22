@@ -17,13 +17,15 @@ scoreCards = (cardValueOnly1, cardValueOnly2) => {
     } else {
         revisedValueCard1 = adjustCardOther(cardValueOnly1);
         revisedValueCard2 = adjustCardOther(cardValueOnly2);
-        if ((revisedValueCard1 + revisedValueCard2) >= 10) {
-            let score = 10 * (revisedValueCard1 + revisedValueCard2 - 10) - 1;
-            return [`artificial ${revisedValueCard1 + revisedValueCard2 - 10}`, score];
-        } else if ((revisedValueCard1 + revisedValueCard2) < 10) {
-            let score = 10 * (revisedValueCard1 + revisedValueCard2)
-            return [`natural ${revisedValueCard1 + revisedValueCard2}`, score];
-        }
+    } if ((revisedValueCard1 + revisedValueCard2) >= 20) {
+        let score = 10 * (revisedValueCard1 + revisedValueCard2 - 20);
+        return [`artificial ${revisedValueCard1 + revisedValueCard2 - 20}`, score];
+    } else if ((revisedValueCard1 + revisedValueCard2) >= 10) {
+        let score = 10 * (revisedValueCard1 + revisedValueCard2 - 10) - 1;
+        return [`artificial ${revisedValueCard1 + revisedValueCard2 - 10}`, score];
+    } else if ((revisedValueCard1 + revisedValueCard2) < 10) {
+        let score = 10 * (revisedValueCard1 + revisedValueCard2)
+        return [`natural ${revisedValueCard1 + revisedValueCard2}`, score];
     }
 }
 // scoreCards returns an array [description of pair, value strictly used for scoring]
@@ -72,9 +74,9 @@ adjustCardOther = (x) => {
 
 compareHands = (hand1, hand2) => {
     if (hand1[1] > hand2[1]) {
-        console.log("invalid hand")
-    } else if (hand1[1] < hand2[1]) {
-        console.log("valid hand");
+        return ("invalid")
+    } else if (hand1[1] < hand2[1] || hand1[1] === hand2[1]) {
+        return ("valid");
     }
 }
 
@@ -91,10 +93,11 @@ const dealtCardsforDealer = [];
 
 function selectNewDeck(event) {
     event.preventDefault();
-    dealtCardsforDealer.splice(0,dealtCardsforDealer.length);
-    dealtCardsforPlayer1.splice(0,dealtCardsforPlayer1.length);
+    dealtCardsforDealer.splice(0, dealtCardsforDealer.length);
+    dealtCardsforPlayer1.splice(0, dealtCardsforPlayer1.length);
     $(".playerCards").remove();
     $("li").remove();
+    $(".handFeedback").text = "";
     $.ajax(selectNewDeckURL).then(
         (data) => {
             deckId = (data.deck_id)
@@ -124,6 +127,7 @@ function selectNewDeck(event) {
                         })
                 }
             }
+            //            console.log(dealtCardsforPlayer1);
         },
         (error) => {
             console.log('webrokeiteverywhere')
@@ -161,35 +165,29 @@ $("body").on("touchend", "img", function (event) {
 
 
 /////////// SET CARDS BASED ON USER ARRANGEMENT
+
 $("#setHand").click("#button", calculateHand)
+
 
 function calculateHand(event) {
     event.preventDefault();
-    console.log(dealtCardsforPlayer1);
+// Match Pictures of cards to Card Objects
+// newLayoutOfCards is an ARRAY of IMAGES
+// dealtCardsforPlayers is am ARRAY of CARDS
+// each CARD is an ARRAY with ONE OBJECT
+    const newLayoutOfCards = $(".playerCards");
+    for (i = 0; i < newLayoutOfCards.length; i++)
+        for (j = 0; j < dealtCardsforPlayer1.length; j++)
+            if (newLayoutOfCards[i].src === dealtCardsforPlayer1[j][0].image) {
+                newLayoutOfCards[i] = dealtCardsforPlayer1[j][0]
+            }
+    topHandScore = scoreCards(newLayoutOfCards[0].value, newLayoutOfCards[1].value);
+    bottomHandScore = scoreCards(newLayoutOfCards[2].value, newLayoutOfCards[3].value);
+    if (compareHands(topHandScore, bottomHandScore) === "valid") {
+        $(".handFeedback").text(`Top: ${topHandScore[0]}, Bottom: ${bottomHandScore[0]}`);
+    } else if (compareHands(topHandScore, bottomHandScore) === "invalid") {
+        $(".handFeedback").text("Invald hand, try again");
+    }
 }
-
-
-
-
-
-// const card1 = {
-//     "image": "https://www.deckofcardsapi.com/static/img/KH.png",
-//     "value": "4",
-//     "suit": "HEARTS",
-//     "code": "KH"
-// }
-// const card2 = {
-//     "image": "https://www.deckofcardsapi.com/static/img/8C.png",
-//     "value": "3",
-//     "suit": "CLUBS",
-//     "code": "8C"
-// }
-// let hand1 = scoreCards(card1.value, card2.value);
-// let hand2 = scoreCards("3", "3");
-
-// console.log(hand1, hand2)
-// compareHands(hand1, hand2);
-
-console.log("connected!")
 
 
