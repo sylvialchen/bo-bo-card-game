@@ -97,7 +97,7 @@ function selectNewDeck(event) {
     dealtCardsforPlayer1.splice(0, dealtCardsforPlayer1.length);
     $(".playerCards").remove();
     $("li").remove();
-    $(".handFeedback").text = "";
+    $(".handFeedback").text("");
     $.ajax(selectNewDeckURL).then(
         (data) => {
             deckId = (data.deck_id)
@@ -166,7 +166,7 @@ $("body").on("touchend", "img", function (event) {
 
 /////////// SET CARDS BASED ON USER ARRANGEMENT
 
-$("#setHand").click("#button", calculateHand)
+$("#verifyHand").click("#button", calculateHand)
 
 
 function calculateHand(event) {

@@ -19,7 +19,6 @@ body {
     grid-template-columns: 1fr;
     grid-template-rows: 0 10% 50% 40%;
     grid-template-areas:
-        ""
         "header"
         "main"
         "div";
@@ -46,7 +45,7 @@ li {
     margin-left: -25px;
 }
 
-#setHand {
+#verifyHand {
     background-color: black;
     color: white;
     height: 46px;
@@ -72,7 +71,6 @@ td {
 }
 .handFeedback{
     grid-area: "div";
-
 }
 div {
     display: flex;
