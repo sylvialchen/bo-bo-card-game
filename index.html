@@ -10,42 +10,39 @@
         integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous" defer></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com"> 
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
     <script src="./script.js" defer></script>
-    <link rel="stylesheet" href="./style.css"/>
+    <link rel="stylesheet" href="./style.css" />
     <title>Bo-Bo</title>
 </head>
 
 <body class="container">
-
-
-
-    </head>
-
-    <body>
+    <header>
         <h1>Bo-Bo</h1>
+        <button id="startButton" type="button" class="btn btn-secondary btn-lg" class="text-right">Start Game</button>
+    </header>
+    <main>
         <ul class="dealerCards"></ul>
-        <button id="startButton" type="button" class="btn btn-secondary btn-lg">Start Game</button>
         <ul class="currentPlayerCards"></ul>
+    </main>
+    <div>
         <table>
             <tr>
-                <td id="topHandLeft" height="150px" width = "100px"></td>
-                <td id="topHandRight" height="150px" width = "100px"></td>
+                <td id="topHandLeft" height="125px" width="90px"></td>
+                <td id="topHandRight" height="125px" width="90px"></td>
             </tr>
             <tr>
-                <td id="bottomHandLeft" height="150px" width = "100px"></td>
-                <td id="bottomHandRight" height="150px" width = "100px"></td>
+                <td id="bottomHandLeft" height="125px" width="90px"></td>
+                <td id="bottomHandRight" height="125px" width="90px"></td>
             </tr>
         </table>
         <button id="setHand" type="button" class="btn btn-secondary btn-lg">Set Hand</button>
         <div class="handFeedback"></div>
-
-
-
-
-
-    </body>
+    </div>
+        
+    
+</body>
 
 </html>

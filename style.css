@@ -1,6 +1,12 @@
+* {
+    /* height & width now includes border & padding */
+    box-sizing: border-box;
+}
+
 html {
     height: 100%
 }
+
 body {
     height: 100%;
     background-repeat: no-repeat;
@@ -9,33 +15,69 @@ body {
     font-family: 'Roboto';
     font-style: "thin";
     color: white;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0 10% 50% 40%;
+    grid-template-areas:
+        ""
+        "header"
+        "main"
+        "div";
+}
+header {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 h1 {
-    font-size: 72px;
+    font-size: 50px;
 }
+
+#startButton {
+    height: 46px;
+    width: 123px;
+    background-color: black;
+    color: white;
+}
+
 li {
     display: inline-block;
     list-style-type: none;
+    margin-left: -25px;
 }
-#startButton {
-    background-color: black;
-    color: white;
-}
+
 #setHand {
     background-color: black;
     color: white;
+    height: 46px;
+    width: 123px;
 }
+
 img {
-    max-height: 150px;
+    max-height: 125px;
     position: static;
     transform: rotate(5deg);
     z-index: 2;
 }
-table, th, td {
-  background-color: white;  
-  border: 1px dotted black;
-  color:black;
-  text-align: center;
-  
+
+table,
+th,
+td {
+    background-color: white;
+    border: 1px dotted black;
+    color: black;
+    text-align: center;
+    border-radius: 10px;
+    max-width: 180px;
+}
+.handFeedback{
+    grid-area: "div";
+
+}
+div {
+    display: flex;
+    grid-area: "div";
+    flex-flow: wrap;
+    justify-content: space-between;
+    align-items: baseline;
 }
