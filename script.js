@@ -171,10 +171,10 @@ $("#setHand").click("#button", calculateHand)
 
 function calculateHand(event) {
     event.preventDefault();
-// Match Pictures of cards to Card Objects
-// newLayoutOfCards is an ARRAY of IMAGES
-// dealtCardsforPlayers is am ARRAY of CARDS
-// each CARD is an ARRAY with ONE OBJECT
+    // Match Pictures of cards to Card Objects
+    // newLayoutOfCards is an ARRAY of IMAGES
+    // dealtCardsforPlayers is am ARRAY of CARDS
+    // each CARD is an ARRAY with ONE OBJECT
     const newLayoutOfCards = $(".playerCards");
     for (i = 0; i < newLayoutOfCards.length; i++)
         for (j = 0; j < dealtCardsforPlayer1.length; j++)
@@ -186,8 +186,41 @@ function calculateHand(event) {
     if (compareHands(topHandScore, bottomHandScore) === "valid") {
         $(".handFeedback").text(`Top: ${topHandScore[0]}, Bottom: ${bottomHandScore[0]}`);
     } else if (compareHands(topHandScore, bottomHandScore) === "invalid") {
-        $(".handFeedback").text("Invald hand, try again");
+        $(".handFeedback").text("Invalid hand, try again");
     }
 }
 
+/////////// SET DEALER'S HAND
+// 1. Calculate all (6) scenarios
+// 2. Add Scores, select scenario with the highest total score.
 
+const scenarios = []
+
+runScenario = (a, b, c, d) => {
+    topHandScore = scoreCards(a.value, b.value);
+    bottomHandScore = scoreCards(c.value, d.value);
+    if (compareHands(topHandScore, bottomHandScore) === "valid") {
+        return topHandScore[1] + bottomHandScore[1];
+    } else if (compareHands(topHandScore, bottomHandScore) === "invalid") {
+        return "Invalid";
+    }
+}
+addValidHandsToScenario = (x) => {
+    if (isNaN(x) === true) {
+        scenarios.push(parseInt(-10))
+    }
+    else if (isNaN(x) !== true) {
+        scenarios.push(parseInt(x))
+    }
+}
+selectDealerScenario = () => {
+    scenarios[0] = runScenario(dealtCardsforDealer[0][0], dealtCardsforDealer[1][0], dealtCardsforDealer[3][0], dealtCardsforDealer[3][0])
+    scenarios[1] = runScenario(dealtCardsforDealer[0][0], dealtCardsforDealer[2][0], dealtCardsforDealer[3][0], dealtCardsforDealer[1][0])
+    scenarios[2] = runScenario(dealtCardsforDealer[0][0], dealtCardsforDealer[3][0], dealtCardsforDealer[2][0], dealtCardsforDealer[1][0])
+    scenarios[3] = runScenario(dealtCardsforDealer[1][0], dealtCardsforDealer[2][0], dealtCardsforDealer[0][0], dealtCardsforDealer[3][0])
+    scenarios[4] = runScenario(dealtCardsforDealer[1][0], dealtCardsforDealer[3][0], dealtCardsforDealer[0][0], dealtCardsforDealer[2][0])
+    scenarios[5] = runScenario(dealtCardsforDealer[2][0], dealtCardsforDealer[3][0], dealtCardsforDealer[0][0], dealtCardsforDealer[1][0])
+    
+    console.log(scenarios)
+    console.log(Math.max(scenarios))
+}
