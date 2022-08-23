@@ -205,14 +205,20 @@ runScenario = (a, b, c, d) => {
         return "Invalid";
     }
 }
-addValidHandsToScenario = (x) => {
-    if (isNaN(x) === true) {
-        scenarios.push(parseInt(-10))
-    }
-    else if (isNaN(x) !== true) {
-        scenarios.push(parseInt(x))
-    }
-}
+
+identifyHighestScore = () => {
+    for (i = 0; i < scenarios.length; i++) 
+        if(scenarios[i] === "Invalid"){
+            scenarios[i] = -10;
+        }
+    for (i = 0; i < scenarios.length; i++) 
+        if(scenarios[i] > scenarios[i+1]){
+            highestScore = scenarios[i];
+            index = i;
+            return highestScore;
+        }
+    };
+
 selectDealerScenario = () => {
     scenarios[0] = runScenario(dealtCardsforDealer[0][0], dealtCardsforDealer[1][0], dealtCardsforDealer[3][0], dealtCardsforDealer[3][0])
     scenarios[1] = runScenario(dealtCardsforDealer[0][0], dealtCardsforDealer[2][0], dealtCardsforDealer[3][0], dealtCardsforDealer[1][0])
@@ -220,7 +226,12 @@ selectDealerScenario = () => {
     scenarios[3] = runScenario(dealtCardsforDealer[1][0], dealtCardsforDealer[2][0], dealtCardsforDealer[0][0], dealtCardsforDealer[3][0])
     scenarios[4] = runScenario(dealtCardsforDealer[1][0], dealtCardsforDealer[3][0], dealtCardsforDealer[0][0], dealtCardsforDealer[2][0])
     scenarios[5] = runScenario(dealtCardsforDealer[2][0], dealtCardsforDealer[3][0], dealtCardsforDealer[0][0], dealtCardsforDealer[1][0])
-    
     console.log(scenarios)
-    console.log(Math.max(scenarios))
+    highestDealerScore = identifyHighestScore(scenarios);
+    scenarioWithHighestScore = scenarios.findIndex((scenario) => scenario === highestDealerScore)
+    return (`scenario${scenarioWithHighestScore}`)
 }
+
+/////////// DISPLAY DEALER'S HAND
+
+
