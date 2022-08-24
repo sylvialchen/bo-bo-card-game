@@ -48,6 +48,7 @@ li {
     max-height: 125px;
     transform: rotate(15deg);
     position: fixed;
+    
 }
 .playerCards {
     max-height: 125px;

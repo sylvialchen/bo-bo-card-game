@@ -147,14 +147,14 @@ function selectNewDeck(event) {
 
 let moving = null;
 
-$("body").on("touchstart", "img", function (event) {
+$("body").on("touchstart", ".playerCards", function (event) {
     moving = event.target;
 });
 
-$("body").on("touchmove", "img", function (event) {
+$("body").on("touchmove", ".playerCards", function (event) {
 });
 
-$("body").on("touchend", "img", function (event) {
+$("body").on("touchend", ".playerCards", function (event) {
     if (moving) {
         if (event.currentTarget.tagName !== 'HTML') {
             let target = null;
@@ -190,9 +190,9 @@ function calculateHand(event) {
     topHandScore = scoreCards(newLayoutOfCards[0].value, newLayoutOfCards[1].value);
     bottomHandScore = scoreCards(newLayoutOfCards[2].value, newLayoutOfCards[3].value);
     if (compareHands(topHandScore, bottomHandScore) === "valid") {
-        $(".handFeedback").text(`Top: ${topHandScore[0]}\nBottom: ${bottomHandScore[0]}`);
+        $(".handFeedback").html(`Top: ${topHandScore[0]}<br>Bottom: ${bottomHandScore[0]}`);
     } else if (compareHands(topHandScore, bottomHandScore) === "invalid") {
-        $(".handFeedback").text("Invalid hand\ntry again");
+        $(".handFeedback").html("Invalid hand<br>try again");
     }
 }
 
@@ -226,7 +226,7 @@ identifyHighestScore = () => {
     };
 
 selectDealerScenario = () => {
-    scenarios[0] = runScenario(dealtCardsforDealer[0][0], dealtCardsforDealer[1][0], dealtCardsforDealer[3][0], dealtCardsforDealer[3][0])
+    scenarios[0] = runScenario(dealtCardsforDealer[0][0], dealtCardsforDealer[1][0], dealtCardsforDealer[2][0], dealtCardsforDealer[3][0])
     scenarios[1] = runScenario(dealtCardsforDealer[0][0], dealtCardsforDealer[2][0], dealtCardsforDealer[3][0], dealtCardsforDealer[1][0])
     scenarios[2] = runScenario(dealtCardsforDealer[0][0], dealtCardsforDealer[3][0], dealtCardsforDealer[2][0], dealtCardsforDealer[1][0])
     scenarios[3] = runScenario(dealtCardsforDealer[1][0], dealtCardsforDealer[2][0], dealtCardsforDealer[0][0], dealtCardsforDealer[3][0])
@@ -235,10 +235,29 @@ selectDealerScenario = () => {
     console.log(scenarios)
     highestDealerScore = identifyHighestScore(scenarios);
     scenarioWithHighestScore = scenarios.findIndex((scenario) => scenario === highestDealerScore)
-    return (`scenario${scenarioWithHighestScore}`)
+    return (`scenario[${scenarioWithHighestScore}]`)
 }
-
+ 
 /////////// DISPLAY DEALER'S HAND
+// on play button, call select DealerScenario, which returns scenario.
+// clear dealer cards on screen
+// use return to switch and output the array order
+// use array to print cards
+// displayDealerHand = () => {
+//     switch ()
+// case 0:
+//     [0,1,2,3]
+// case 1:
+//     [0,2,3,1]
+// case 2:
+//     [0,3,2,1]
+// case 3:
+//     [1,2,0,3]
+// case 4:
+//     [1,3,0,2]
+// case 5:
+//     [2,3,0,1]
+// }
 
 
 
