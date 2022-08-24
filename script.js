@@ -124,7 +124,7 @@ function selectNewDeck(event) {
                             const addLi = document.createElement("li");
                             const addPic = document.createElement("img");
                             addPic.setAttribute("class", "dealerCards")
-                            addPic.src = "./NicePng_playing-card-back-png_1216052.png";
+                            addPic.src = "./backOfCard.png";
                             $("ul.currentDealerCards").append(addLi).append(addPic);
                         },
                         (error) => {
