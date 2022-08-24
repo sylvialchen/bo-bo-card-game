@@ -23,26 +23,40 @@
         <h1>Bo-Bo</h1>
         <button id="startButton" type="button" class="btn btn-secondary btn-lg" class="text-right">Start Game</button>
     </header>
-    <main>
-        <ul class="dealerCards"></ul>
+    <div class="dealer">
+        <ul class="currentDealerCards"></ul>
+        </div>
+    <div class="player">
         <ul class="currentPlayerCards"></ul>
-    </main>
-    <div>
-        <table>
-            <tr>
-                <td id="topHandLeft" height="125px" width="90px"></td>
-                <td id="topHandRight" height="125px" width="90px"></td>
+    </div>
+    <div class="bottom">
+        <table class="userInput" width="180px">
+            <tr height="125px">
+                <td class="topCards"></td>
+                <td class="topCards"></td>
+
             </tr>
             <tr>
-                <td id="bottomHandLeft" height="125px" width="90px"></td>
-                <td id="bottomHandRight" height="125px" width="90px"></td>
+                <tr height="125px">
+                    <td class="bottomCards"></td>
+                    <td class="bottomCards"></td>
             </tr>
         </table>
-        <button id="verifyHand" type="button" class="btn btn-secondary btn-lg">Verify Hand</button>
-        <p class="handFeedback"></p>
+        <table class="userOptions">
+            <tr>
+                <td id="right">
+                    <p class="handFeedback"> </p>
+                    <button id="verifyHand" type="button" class="btn btn-secondary btn-lg">Verify
+                        Hand</button>
+                </td>
+            </tr>
+            <tr>
+                <td id="right"><button id="play" type="button" class="btn btn-secondary btn-lg">Play</button></td>
+            </tr>
+        </table>
     </div>
-        
-    
+
+
 </body>
 
 </html>

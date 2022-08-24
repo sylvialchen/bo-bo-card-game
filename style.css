@@ -17,11 +17,12 @@ body {
     color: white;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 0 10% 50% 40%;
+    grid-template-rows: 0 10% 25% 25% 40%;
     grid-template-areas:
         "header"
-        "main"
-        "div";
+        "dealer"
+        "player"
+        "bottom";
 }
 header {
     display: flex;
@@ -32,50 +33,49 @@ h1 {
     font-size: 50px;
 }
 
-#startButton {
+button {
     height: 46px;
     width: 123px;
     background-color: black;
     color: white;
 }
-
 li {
     display: inline-block;
     list-style-type: none;
     margin-left: -25px;
 }
-
-#verifyHand {
-    background-color: black;
-    color: white;
-    height: 46px;
-    width: 123px;
+.dealerCards {
+    max-height: 125px;
+    transform: rotate(15deg);
+    position: fixed;
 }
-
-img {
+.playerCards {
     max-height: 125px;
     position: static;
     transform: rotate(5deg);
     z-index: 2;
 }
-
-table,
-th,
-td {
+.topCards,
+.bottomCards {
     background-color: white;
     border: 1px dotted black;
     color: black;
     text-align: center;
     border-radius: 10px;
-    max-width: 180px;
+    width: 90px;
+    height: 125px;
+
 }
-.handFeedback{
-    grid-area: "div";
+.userOptions{
+    height: 200px;
+    text-align: right;
+    justify-content: baseline;
 }
-div {
+.bottom {
     display: flex;
-    grid-area: "div";
-    flex-flow: wrap;
+    grid-area: "bottom";
+    flex-flow: nowrap;
     justify-content: space-between;
     align-items: baseline;
+    width: 100%
 }

@@ -96,6 +96,7 @@ function selectNewDeck(event) {
     dealtCardsforDealer.splice(0, dealtCardsforDealer.length);
     dealtCardsforPlayer1.splice(0, dealtCardsforPlayer1.length);
     $(".playerCards").remove();
+    $(".dealerCards").remove();
     $("li").remove();
     $(".handFeedback").text("");
     $.ajax(selectNewDeckURL).then(
@@ -120,9 +121,14 @@ function selectNewDeck(event) {
                     $.ajax(drawCardsURL1 + deckId + drawCardsURL2).then(
                         (data) => {
                             dealtCardsforDealer.push(data.cards)
+                            const addLi = document.createElement("li");
+                            const addPic = document.createElement("img");
+                            addPic.setAttribute("class", "dealerCards")
+                            addPic.src = "./NicePng_playing-card-back-png_1216052.png";
+                            $("ul.currentDealerCards").append(addLi).append(addPic);
                         },
                         (error) => {
-                            console.log('webrokeittthere')
+                            console.log('webrokeitthere')
                             return;
                         })
                 }
@@ -184,9 +190,9 @@ function calculateHand(event) {
     topHandScore = scoreCards(newLayoutOfCards[0].value, newLayoutOfCards[1].value);
     bottomHandScore = scoreCards(newLayoutOfCards[2].value, newLayoutOfCards[3].value);
     if (compareHands(topHandScore, bottomHandScore) === "valid") {
-        $(".handFeedback").text(`Top: ${topHandScore[0]}, Bottom: ${bottomHandScore[0]}`);
+        $(".handFeedback").text(`Top: ${topHandScore[0]}\nBottom: ${bottomHandScore[0]}`);
     } else if (compareHands(topHandScore, bottomHandScore) === "invalid") {
-        $(".handFeedback").text("Invalid hand, try again");
+        $(".handFeedback").text("Invalid hand\ntry again");
     }
 }
 
