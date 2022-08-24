@@ -99,6 +99,7 @@ function selectNewDeck(event) {
     $(".dealerCards").remove();
     $("li").remove();
     $(".handFeedback").text("");
+    $(".finalDealerHand").remove();
     $.ajax(selectNewDeckURL).then(
         (data) => {
             deckId = (data.deck_id)
@@ -172,21 +173,27 @@ $("body").on("touchend", ".playerCards", function (event) {
 
 /////////// SET CARDS BASED ON USER ARRANGEMENT
 
-$("#verifyHand").click("#button", calculateHand)
+$("#verifyHand").click("#button", verifyHand)
 
 
-function calculateHand(event) {
-    event.preventDefault();
+createNewArrayWithUserCards = () => {
     // Match Pictures of cards to Card Objects
     // newLayoutOfPlayerCards is an ARRAY of IMAGES
     // dealtCardsforPlayers is am ARRAY of CARDS
     // each CARD is an ARRAY with ONE OBJECT
-    const newLayoutOfPlayerCards = $(".playerCards");
+    newLayoutOfPlayerCards = $(".playerCards");
     for (i = 0; i < newLayoutOfPlayerCards.length; i++)
         for (j = 0; j < dealtCardsforPlayer1.length; j++)
             if (newLayoutOfPlayerCards[i].src === dealtCardsforPlayer1[j][0].image) {
                 newLayoutOfPlayerCards[i] = dealtCardsforPlayer1[j][0]
             }
+    return newLayoutOfPlayerCards
+}
+// Verify Hand
+
+function verifyHand(event) {
+    event.preventDefault();
+    newLayoutOfPlayerCards = createNewArrayWithUserCards();
     topHandScore = scoreCards(newLayoutOfPlayerCards[0].value, newLayoutOfPlayerCards[1].value);
     bottomHandScore = scoreCards(newLayoutOfPlayerCards[2].value, newLayoutOfPlayerCards[3].value);
     if (compareHands(topHandScore, bottomHandScore) === "valid") {
@@ -274,8 +281,34 @@ function playerVsDealer(event) {
     dealerArray = matchDealerArray(dealerScenario);
     // console.log(dealerArray);
     newLayoutOfDealerCards = [dealtCardsforDealer[dealerArray[0]], dealtCardsforDealer[dealerArray[1]], dealtCardsforDealer[dealerArray[2]], dealtCardsforDealer[dealerArray[3]]]
-   console.log(newLayoutOfDealerCards)
-
+    $(".dealerCards").remove();
+    // this code could be better written
+    $(".dealerTopCard0").html(`<img class="finalDealerHand" src="${newLayoutOfDealerCards[0][0].image}"/>`);
+    $(".dealerTopCard1").html(`<img class="finalDealerHand" src="${newLayoutOfDealerCards[1][0].image}"/>`);
+    $(".dealerBottomCard2").html(`<img class="finalDealerHand" src="${newLayoutOfDealerCards[2][0].image}"/>`);
+    $(".dealerBottomCard3").html(`<img class="finalDealerHand" src="${newLayoutOfDealerCards[3][0].image}"/>`);
+    findWinner();
 }
 
+/////////// DISPLAY FINAL SCORING OF HANDS
+// Top hands are evaluated against each other
+// Bottom hands are evaluated against each other
+// Winner must win both top and bottom.
 
+function findWinner(event) {
+    newLayoutOfPlayerCards = createNewArrayWithUserCards();
+// Set scoring based on board. Prior topHandScore & bottomHandScore for Dealer were used
+// while iterating through all possible scenarios for Dealer. 
+    dealerTop = scoreCards(newLayoutOfDealerCards[0][0].value, newLayoutOfDealerCards[1][0].value)
+    dealerBottom = scoreCards(newLayoutOfDealerCards[2][0].value, newLayoutOfDealerCards[3][0].value)
+// Player score is reinitialized because the "Verify" button is not necessary to play.
+    playerTop = scoreCards(newLayoutOfPlayerCards[0].value, newLayoutOfPlayerCards[1].value);
+    playerBottom = scoreCards(newLayoutOfPlayerCards[2].value, newLayoutOfPlayerCards[3].value);
+    if (playerTop > dealerTop && playerBottom > dealerBottom) {
+            console.log ("Player Wins")
+        } else if (playerTop < dealerTop && playerBottom < dealerBottom) {
+            console.log ("Dealer Wins");
+        } else {
+            console.log ("Push");
+        }
+}
