@@ -9,6 +9,7 @@ html {
 
 body {
     height: 100%;
+    /* Style (background color and font) adapted from www.deckofcardsapi.com */
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-image: linear-gradient(#1A4A1C, #308834);
@@ -44,16 +45,24 @@ li {
     list-style-type: none;
     margin-left: -25px;
 }
+/* .dealer {
+    display: flex;
+    grid-area: "dealer";
+    align-items: space-between;
+    
+} */
 .dealerCards {
     max-height: 125px;
     transform: rotate(15deg);
     position: fixed;
-    
 }
 .finalDealerHand {
     max-height: 125px;
     transform: rotate(15deg);
-    position: fixed;
+}
+.displayWinner {
+    grid-area: "player";
+    text-align: end;
 }
 .playerCards {
     max-height: 125px;
@@ -82,6 +91,6 @@ li {
     grid-area: "bottom";
     flex-flow: nowrap;
     justify-content: space-between;
-    align-items: baseline;
+    align-self: baseline;
     width: 100%
 }
