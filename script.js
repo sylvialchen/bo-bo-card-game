@@ -100,6 +100,7 @@ function selectNewDeck(event) {
     $("li").remove();
     $(".handFeedback").text("");
     $(".finalDealerHand").remove();
+    $(".displayWinner").text("");
     $.ajax(selectNewDeckURL).then(
         (data) => {
             deckId = (data.deck_id)
@@ -305,10 +306,10 @@ function findWinner(event) {
     playerTop = scoreCards(newLayoutOfPlayerCards[0].value, newLayoutOfPlayerCards[1].value);
     playerBottom = scoreCards(newLayoutOfPlayerCards[2].value, newLayoutOfPlayerCards[3].value);
     if (playerTop > dealerTop && playerBottom > dealerBottom) {
-            console.log ("Player Wins")
+            $(".displayWinner").text("Player Wins");
         } else if (playerTop < dealerTop && playerBottom < dealerBottom) {
-            console.log ("Dealer Wins");
+            $(".displayWinner").text("Dealer Wins");
         } else {
-            console.log ("Push");
+            $(".displayWinner").text("Push");
         }
 }
