@@ -20,3 +20,5 @@ Bo-Bo is a chinese card game where each player gets (4) cards. The (4) cards mus
 * Betting button to simulate how the game is played
 * Add additional players
 * Modal of instructions
+* Deactivate "Start Game" button once a game is started
+* "Exciting" display of winner
