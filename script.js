@@ -142,7 +142,7 @@ function selectNewDeck(event) {
 }
 /////////// MAKE CARDS MOVEABLE ON MOBILE ONLY
 // Player needs to choose how they will arrange the cards.
-// **** CODE FROM WWW.HORUSKOL.NET
+// **** CODE ADAPTED FROM WWW.HORUSKOL.NET
 // **** https://www.horuskol.net/blog/2020-08-15/drag-and-drop-elements-on-touch-devices/
 
 let moving = null;
