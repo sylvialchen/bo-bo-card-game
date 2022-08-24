@@ -178,17 +178,17 @@ $("#verifyHand").click("#button", calculateHand)
 function calculateHand(event) {
     event.preventDefault();
     // Match Pictures of cards to Card Objects
-    // newLayoutOfCards is an ARRAY of IMAGES
+    // newLayoutOfPlayerCards is an ARRAY of IMAGES
     // dealtCardsforPlayers is am ARRAY of CARDS
     // each CARD is an ARRAY with ONE OBJECT
-    const newLayoutOfCards = $(".playerCards");
-    for (i = 0; i < newLayoutOfCards.length; i++)
+    const newLayoutOfPlayerCards = $(".playerCards");
+    for (i = 0; i < newLayoutOfPlayerCards.length; i++)
         for (j = 0; j < dealtCardsforPlayer1.length; j++)
-            if (newLayoutOfCards[i].src === dealtCardsforPlayer1[j][0].image) {
-                newLayoutOfCards[i] = dealtCardsforPlayer1[j][0]
+            if (newLayoutOfPlayerCards[i].src === dealtCardsforPlayer1[j][0].image) {
+                newLayoutOfPlayerCards[i] = dealtCardsforPlayer1[j][0]
             }
-    topHandScore = scoreCards(newLayoutOfCards[0].value, newLayoutOfCards[1].value);
-    bottomHandScore = scoreCards(newLayoutOfCards[2].value, newLayoutOfCards[3].value);
+    topHandScore = scoreCards(newLayoutOfPlayerCards[0].value, newLayoutOfPlayerCards[1].value);
+    bottomHandScore = scoreCards(newLayoutOfPlayerCards[2].value, newLayoutOfPlayerCards[3].value);
     if (compareHands(topHandScore, bottomHandScore) === "valid") {
         $(".handFeedback").html(`Top: ${topHandScore[0]}<br>Bottom: ${bottomHandScore[0]}`);
     } else if (compareHands(topHandScore, bottomHandScore) === "invalid") {
@@ -232,10 +232,10 @@ selectDealerScenario = () => {
     scenarios[3] = runScenario(dealtCardsforDealer[1][0], dealtCardsforDealer[2][0], dealtCardsforDealer[0][0], dealtCardsforDealer[3][0])
     scenarios[4] = runScenario(dealtCardsforDealer[1][0], dealtCardsforDealer[3][0], dealtCardsforDealer[0][0], dealtCardsforDealer[2][0])
     scenarios[5] = runScenario(dealtCardsforDealer[2][0], dealtCardsforDealer[3][0], dealtCardsforDealer[0][0], dealtCardsforDealer[1][0])
-    console.log(scenarios)
+    // console.log(scenarios)
     highestDealerScore = identifyHighestScore(scenarios);
     scenarioWithHighestScore = scenarios.findIndex((scenario) => scenario === highestDealerScore)
-    return (`scenario[${scenarioWithHighestScore}]`)
+    return (`scenario${scenarioWithHighestScore}`)
 }
  
 /////////// DISPLAY DEALER'S HAND
@@ -243,21 +243,39 @@ selectDealerScenario = () => {
 // clear dealer cards on screen
 // use return to switch and output the array order
 // use array to print cards
-// displayDealerHand = () => {
-//     switch ()
-// case 0:
-//     [0,1,2,3]
-// case 1:
-//     [0,2,3,1]
-// case 2:
-//     [0,3,2,1]
-// case 3:
-//     [1,2,0,3]
-// case 4:
-//     [1,3,0,2]
-// case 5:
-//     [2,3,0,1]
-// }
 
+$("#play").click("button", playerVsDealer)
+
+matchDealerArray = (x) => {
+    switch(x) {
+        case "scenario0":
+            return [0,1,2,3];
+            break;
+        case "scenario1":
+            return [0,2,3,1];
+            break;
+        case "scenario2":
+            return [0,3,2,1];
+            break;
+        case "scenario3":
+            return [1,2,0,3];
+            break;
+        case "scenario4":
+            return [1,3,0,2];
+            break;
+        case "scenario5":
+            return [2,3,0,1];
+            break;
+    };
+}
+function playerVsDealer(event) {
+    event.preventDefault();
+    dealerScenario = selectDealerScenario();
+    dealerArray = matchDealerArray(dealerScenario);
+    // console.log(dealerArray);
+    newLayoutOfDealerCards = [dealtCardsforDealer[dealerArray[0]], dealtCardsforDealer[dealerArray[1]], dealtCardsforDealer[dealerArray[2]], dealtCardsforDealer[dealerArray[3]]]
+   console.log(newLayoutOfDealerCards)
+
+}
 
 
