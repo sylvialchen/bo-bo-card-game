@@ -1,5 +1,10 @@
 #### Bo-Bo Card Game (MOBILE ONLY)
-Bo-Bo is a chinese card game where each player gets (4) cards. The (4) cards must be organized into (2) "hands" of (2) cards. The hands' are scored as pairs being the highest, then base 10 for mismatched cards. Aces are highest only in pairs, otherwise it is counted as "1." Similar with Face cards, where they take on their value only as a pair, but are otherwise counted as "10." With Base 10, an unmatching face card will = 0.
+Bo-Bo is a chinese card game where each player gets (4) cards.
+The (4) cards must be organized into (2) "hands" of (2) cards. 
+
+Hands' are scored as pairs being the highest, and *base 10* for mismatched cards:
+* Aces are highest only in pairs, otherwise it is counted as "1."
+* Face cards take their value only as a pair, otherwise counted as "10".This means that an unmatching face card will === 0.
 
 ### Technologies Used
 * Javascript
@@ -17,8 +22,8 @@ Bo-Bo is a chinese card game where each player gets (4) cards. The (4) cards mus
 ## Getting Started
 
 ## Future Enhancements
-* Betting button to simulate how the game is played
-* Add additional players
 * Modal of instructions
 * Deactivate "Start Game" button once a game is started
 * "Exciting" display of winner
+* Refine drag and drop option to restrict movement outside of defined area. Currently, the code setup will include misplaced cards.
+* Add additional players

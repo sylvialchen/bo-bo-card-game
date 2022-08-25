@@ -63,6 +63,9 @@ li {
 .displayWinner {
     grid-area: "player";
     text-align: end;
+    font-style: bold;
+    font-size: 25px;
+    word-wrap: break-word;
 }
 .playerCards {
     max-height: 125px;
