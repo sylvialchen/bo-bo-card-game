@@ -22,7 +22,7 @@ This means that an unmatching face card will === 0.
 
 ## Getting Started
 * [Hosted on GitHub Pages](https://sylvialchen.github.io/bo-bo-card-game/)
-* Game functions in **Chrome's Mobile View Only**
+* Game functions in **Chrome Mobile Only**
 
 ## Future Enhancements
 * Expand experience & functionality to be played on other devices
