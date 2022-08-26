@@ -25,7 +25,7 @@ This means that an unmatching face card will === 0.
 * Game functions in **Chrome Browser, Developer + Mobile View Only!**
 * Open page in Chrome
 * Right click and "Inspect Page" or "Option+CMD+I"
-* Select the Mobile View Option to the right of Console.
+* Select the Mobile View Option to the left right of Console.
 * ![image](https://user-images.githubusercontent.com/101881486/186911561-f732fb7e-f2e9-43bc-bb1f-edc7ac60c7c2.png)
 
 
