@@ -1,4 +1,4 @@
-#### Bo-Bo Card Game (Chrome Mobile View Only!)
+#### Bo-Bo Card Game (Chrome Browser, Developer + Mobile View Only!)
 Bo-Bo is a chinese card game where each player gets (4) cards.
 The (4) cards must be organized into (2) "hands" of (2) cards. 
 
@@ -22,7 +22,13 @@ This means that an unmatching face card will === 0.
 
 ## Getting Started
 * [Hosted on GitHub Pages](https://sylvialchen.github.io/bo-bo-card-game/)
-* Game functions in **Chrome Mobile Only**
+* Game functions in **Chrome Browser, Developer + Mobile View Only!**
+* Open page in Chrome
+* Right click and "Inspect Page" or "Option+CMD+I"
+* Select the Mobile View Option to the right of Console.
+* ![image](https://user-images.githubusercontent.com/101881486/186911561-f732fb7e-f2e9-43bc-bb1f-edc7ac60c7c2.png)
+
+
 
 ## Future Enhancements
 * Expand experience & functionality to be played on other devices
